@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Quartz;
+using Quartz.Listener;
 
 namespace IMagParsing.Common.Config;
 
@@ -17,22 +18,19 @@ public static class Startup
     {
         services.AddQuartz(q =>
         {
-            var parseJobKey = new JobKey("ParseProductJob");
-            var checkPriceChangeJobKey = new JobKey("CheckPriceChangeJobKey");
+            var group = "productProcessingGroup";
+            
+            var parseJobKey = new JobKey("ParseProductJob", group);
+            var checkPriceChangeJobKey = new JobKey("CheckPriceChangeJob", group);
 
             q.AddJob<ParseProductJob>(opts => opts.WithIdentity(parseJobKey));
-            q.AddJob<CheckPriceChangeJob>(opts => opts.WithIdentity(checkPriceChangeJobKey));
+            q.AddJob<CheckPriceChangeJob>(opts => opts.WithIdentity(checkPriceChangeJobKey).StoreDurably());
 
-            q.AddTrigger(opts => opts
+            var t =q.AddTrigger(opts => opts
                 .ForJob(parseJobKey)
+                .WithIdentity("ParseProductTrigger", group)
                 .StartNow()
-                .WithSimpleSchedule(x => x
-                    .WithRepeatCount(0)
-                    .WithIntervalInSeconds(0)));
-
-            q.AddTrigger(opts => opts
-                .ForJob(checkPriceChangeJobKey)
-                .StartAt(DateBuilder.FutureDate(10, IntervalUnit.Second)));
+                .WithSimpleSchedule(x => x.WithRepeatCount(0)));
 
             /*q.AddTrigger(opts => opts
                 .ForJob(parseJobKey)

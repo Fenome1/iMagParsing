@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IMagParsing", "IMagParsing\IMagParsing.csproj", "{F9ED62CD-B345-4A25-B916-1200D9C2A81F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IMagParsing.Infrastructure", "IMagParsing.Infrastructure\IMagParsing.Infrastructure.csproj", "{36726378-A322-49AC-BDCD-FD319BA38CCC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IMagParsing.Core", "IMagParsing.Core\IMagParsing.Core.csproj", "{86003710-CEA5-44D7-80AF-A7BEC5DED963}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F9ED62CD-B345-4A25-B916-1200D9C2A81F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9ED62CD-B345-4A25-B916-1200D9C2A81F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9ED62CD-B345-4A25-B916-1200D9C2A81F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9ED62CD-B345-4A25-B916-1200D9C2A81F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{36726378-A322-49AC-BDCD-FD319BA38CCC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36726378-A322-49AC-BDCD-FD319BA38CCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36726378-A322-49AC-BDCD-FD319BA38CCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36726378-A322-49AC-BDCD-FD319BA38CCC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{86003710-CEA5-44D7-80AF-A7BEC5DED963}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86003710-CEA5-44D7-80AF-A7BEC5DED963}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86003710-CEA5-44D7-80AF-A7BEC5DED963}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86003710-CEA5-44D7-80AF-A7BEC5DED963}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

@@ -1,6 +1,5 @@
-﻿using IMagParsing.Common.Enums;
+﻿using IMagParsing.Core.Enums;
 using IMagParsing.Core.Models;
-using IMagParsing.Services;
 
 namespace IMagParsing.Common.Interfaces;
 

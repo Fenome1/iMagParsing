@@ -1,5 +1,5 @@
-﻿using IMagParsing.Common.Enums;
-using IMagParsing.Common.Interfaces;
+﻿using IMagParsing.Common.Interfaces;
+using IMagParsing.Core.Enums;
 using IMagParsing.Core.Models;
 using IMagParsing.Infrastructure;
 using Microsoft.EntityFrameworkCore;
@@ -37,7 +37,9 @@ public class ProductService(ProductsContext context) : IProductService
     }
 
     public async Task<ProductParsing[]> GetProductsByStatus(ActualStatus actualStatus)
-        => await context.ProductParsings
+    {
+        return await context.ProductParsings
             .Where(p => p.ActualStatus == actualStatus)
             .ToArrayAsync();
+    }
 }

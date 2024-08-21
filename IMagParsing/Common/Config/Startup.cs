@@ -52,7 +52,7 @@ public static class Startup
     {
         services.AddTransient<IProductParser, ProductParser>();
         services.AddTransient<IProductService, ProductService>();
-        
+
         services.AddSingleton<HtmlWeb>();
     }
 

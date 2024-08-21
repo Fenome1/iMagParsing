@@ -1,5 +1,5 @@
-﻿using IMagParsing.Common.Enums;
-using IMagParsing.Common.Interfaces;
+﻿using IMagParsing.Common.Interfaces;
+using IMagParsing.Core.Enums;
 using Quartz;
 
 namespace IMagParsing.Jobs;

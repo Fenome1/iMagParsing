@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using IMagParsing.Core.Models;
+﻿using IMagParsing.Core.Models;
 
 namespace IMagParsing.Common.Interfaces;
 

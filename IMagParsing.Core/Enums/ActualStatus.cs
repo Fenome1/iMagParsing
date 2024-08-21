@@ -1,4 +1,4 @@
-﻿namespace IMagParsing.Common.Enums;
+﻿namespace IMagParsing.Core.Enums;
 
 public enum ActualStatus
 {

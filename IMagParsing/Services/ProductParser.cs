@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using HtmlAgilityPack;
+﻿using HtmlAgilityPack;
 using IMagParsing.Common.Interfaces;
 using IMagParsing.Core.Models;
 

@@ -5,7 +5,9 @@ namespace IMagParsing.Infrastructure;
 
 public sealed class ProductsContext : DbContext
 {
-    public ProductsContext(DbContextOptions<ProductsContext> options) : base(options) { }
+    public ProductsContext(DbContextOptions<ProductsContext> options) : base(options)
+    {
+    }
 
     public DbSet<ProductParsing> ProductParsings => Set<ProductParsing>();
 
@@ -38,6 +40,10 @@ public sealed class ProductsContext : DbContext
 
                 entity.Property(e => e.ParsingDate)
                     .HasDefaultValueSql("CURRENT_TIMESTAMP");
+
+                entity.Property(e => e.ActualStatus)
+                    .IsRequired()
+                    .HasColumnType("integer");
             }
         );
         base.OnModelCreating(modelBuilder);

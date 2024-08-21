@@ -25,4 +25,8 @@
         <ProjectReference Include="..\IMagParsing.Core\IMagParsing.Core.csproj"/>
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Migrations\" />
+    </ItemGroup>
+
 </Project>

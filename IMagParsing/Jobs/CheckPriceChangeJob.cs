@@ -1,42 +1,44 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using IMagParsing.Infrastructure;
-using Microsoft.EntityFrameworkCore;
+﻿using IMagParsing.Common.Enums;
+using IMagParsing.Common.Interfaces;
 using Quartz;
 
 namespace IMagParsing.Jobs;
 
-public class CheckPriceChangeJob(ProductsContext dbContext) : IJob
+public class CheckPriceChangeJob(IProductService productService) : IJob
 {
     public async Task Execute(IJobExecutionContext context)
     {
-        var previousProducts = await dbContext.ProductParsings
-            .Where(p => p.ParsingDate.Date < DateTime.UtcNow.Date)
-            .ToListAsync();
-        
-        var latestProducts = await dbContext.ProductParsings
-            .Where(p => p.ParsingDate.Date == DateTime.UtcNow.Date)
+        var lastProducts = await productService.GetProductsByStatus(ActualStatus.Last);
+
+        if (!lastProducts.Any())
+        {
+            await productService.ResetLastDataProducts();
+            return;
+        }
+
+        var newProducts = (await productService.GetProductsByStatus(ActualStatus.New))
             .OrderBy(p => p.ProductName)
             .ThenBy(p => p.StorageSize)
             .ThenBy(p => p.Price)
-            .ToListAsync();
-        
-        foreach (var latestProduct in latestProducts)
-        {
-            var previousProduct = previousProducts
-                .FirstOrDefault(p => p.ProductName == latestProduct.ProductName 
-                                     && p.ColorType == latestProduct.ColorType 
-                                     && p.StorageSize == latestProduct.StorageSize);
+            .ToList();
 
-            if (previousProduct is not null && previousProduct.Price != latestProduct.Price)
-            {
-                var priceDifference = latestProduct.Price - previousProduct.Price;
-                var priceChange = priceDifference > 0 ? "increased" : "decreased";
-    
-                Console.WriteLine($"Продукт {latestProduct.ProductName} ({latestProduct.ColorType}, {latestProduct.StorageSize}) price {priceChange} from " +
-                                  $"{previousProduct.Price} to {latestProduct.Price} by {Math.Abs(priceDifference)}.");
-            }
+        foreach (var newProduct in newProducts)
+        {
+            var previousProduct = lastProducts
+                .FirstOrDefault(p => p.ProductName == newProduct.ProductName
+                                     && p.ColorType == newProduct.ColorType
+                                     && p.StorageSize == newProduct.StorageSize);
+
+            if (previousProduct is null || previousProduct.Price == newProduct.Price) continue;
+
+            var priceDifference = newProduct.Price - previousProduct.Price;
+            var priceChange = priceDifference > 0 ? "increased" : "decreased";
+
+            Console.WriteLine(
+                $"Продукт {newProduct.ProductName} ({newProduct.ColorType}, {newProduct.StorageSize}) price {priceChange} from " +
+                $"{previousProduct.Price} to {newProduct.Price} by {Math.Abs(priceDifference)}.");
         }
+
+        await productService.ResetLastDataProducts();
     }
 }

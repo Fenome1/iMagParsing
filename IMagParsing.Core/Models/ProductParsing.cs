@@ -1,4 +1,5 @@
 ﻿using System;
+using IMagParsing.Common.Enums;
 
 namespace IMagParsing.Core.Models;
 
@@ -10,4 +11,5 @@ public class ProductParsing
     public string StorageSize { get; set; }
     public decimal Price { get; set; }
     public DateTime ParsingDate { get; set; }
+    public ActualStatus ActualStatus  { get; set; }
 }

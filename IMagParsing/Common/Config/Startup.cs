@@ -26,9 +26,15 @@ public static class Startup
             q.AddJob<ParseProductJob>(opts => opts.WithIdentity(parseJobKey));
             q.AddJob<CheckPriceChangeJob>(opts => opts.WithIdentity(checkPriceChangeJobKey).StoreDurably());
 
-            var t =q.AddTrigger(opts => opts
+            q.AddTrigger(opts => opts
                 .ForJob(parseJobKey)
                 .WithIdentity("ParseProductTrigger", group)
+                .StartNow()
+                .WithSimpleSchedule(x => x.WithRepeatCount(0)));
+            
+            q.AddTrigger(opts => opts
+                .ForJob(checkPriceChangeJobKey)
+                .WithIdentity("CheckPriceChangeTrigger", group)
                 .StartNow()
                 .WithSimpleSchedule(x => x.WithRepeatCount(0)));
 

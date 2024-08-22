@@ -12,7 +12,7 @@ public class CheckPriceChangeJob(IProductService productService) : IJob
 
         if (!lastProducts.Any())
         {
-            await productService.ResetLastDataProducts();
+            await productService.ChangeActualProducts();
             return;
         }
 
@@ -39,6 +39,6 @@ public class CheckPriceChangeJob(IProductService productService) : IJob
                 $"{previousProduct.Price} to {newProduct.Price} by {Math.Abs(priceDifference)}.");
         }
 
-        await productService.ResetLastDataProducts();
+        await productService.ChangeActualProducts();
     }
 }

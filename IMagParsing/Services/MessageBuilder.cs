@@ -1,6 +1,5 @@
 ﻿using System.Globalization;
 using IMagParsing.Common.Interfaces;
-using IMagParsing.Core.Models;
 using IMagParsing.ViewModels;
 
 namespace IMagParsing.Services;
@@ -28,12 +27,13 @@ public class MessageBuilder : IMessageBuilder
         return string.Join("\n", priceChangeMessages);
     }
 
-    public string BuildFormattedProductList(ProductParsing[] products)
+    public string BuildFormattedProductList(ProductGroup[] products)
     {
         var formattedList = products
-            .OrderByDescending(p => p.ProductName)
+            .OrderBy(p => p.ProductName)
+            .ThenBy(p => ExtractStorageSize(p.StorageSize))
             .Select(p => $"📱 Название: {p.ProductName} \n" +
-                         $"🎨 Цвет: {p.ColorType}\n" +
+                         $"🎨 Цвет(-а): {p.Colors}\n" +
                          $"💿 Размер: {p.StorageSize}.\n" +
                          $"💵 Цена: {FormatPrice(p.Price)} Руб.\n")
             .ToList();
@@ -46,5 +46,11 @@ public class MessageBuilder : IMessageBuilder
         return price
             .ToString("N2", CultureInfo.InvariantCulture)
             .Replace(",", " ");
+    }
+
+    private int ExtractStorageSize(string storageSize)
+    {
+        var sizeDigits = new string(storageSize.Where(char.IsDigit).ToArray());
+        return int.TryParse(sizeDigits, out var size) ? size : 0;
     }
 }

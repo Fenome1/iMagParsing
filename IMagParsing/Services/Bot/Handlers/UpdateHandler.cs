@@ -1,6 +1,7 @@
 ﻿using IMagParsing.Common.Interfaces;
 using IMagParsing.Common.Interfaces.Bot;
 using IMagParsing.Core.Enums;
+using IMagParsing.ViewModels;
 using Telegram.Bot;
 using Telegram.Bot.Polling;
 using Telegram.Bot.Types;
@@ -69,9 +70,23 @@ public class UpdateHandler(
     private async Task HandleCheckCommandAsync(long userId, CancellationToken cancellationToken)
     {
         var latestProducts = await productService.GetProductsByStatus(ActualStatus.Last);
-        var responseMessage = !latestProducts.Any()
+
+        var groupedProducts = latestProducts
+            .GroupBy(p => new { p.ProductName, p.StorageSize })
+            .Select(g => new ProductGroup
+            {
+                ProductName = g.Key.ProductName,
+                StorageSize = g.Key.StorageSize,
+                Colors = string.Join(", ", g.Select(p => p.ColorType).Distinct()),
+                Price = g.First().Price
+            })
+            .OrderBy(p => p.ProductName)
+            .ThenBy(p => p.StorageSize)
+            .ToArray();
+
+        var responseMessage = !groupedProducts.Any()
             ? "Актуальные продукты не найдены"
-            : messageBuilder.BuildFormattedProductList(latestProducts);
+            : messageBuilder.BuildFormattedProductList(groupedProducts);
 
         await SendMessageAsync(userId, responseMessage, cancellationToken);
     }

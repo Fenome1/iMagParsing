@@ -11,8 +11,7 @@ public class BotService(ITelegramBotClient botClient, IUpdateHandler updateHandl
         try
         {
             botClient.StartReceiving(updateHandler,
-                new ReceiverOptions(),
-                default);
+                new ReceiverOptions());
         }
         catch (Exception e)
         {

@@ -30,7 +30,7 @@ public static class Startup
             q.AddJob<ParseProductJob>(opts => opts.WithIdentity(parseJobKey));
             q.AddJob<CheckPriceChangeJob>(opts => opts.WithIdentity(checkPriceChangeJobKey));
 
-            /*q.AddTrigger(opts => opts
+            q.AddTrigger(opts => opts
                 .ForJob(parseJobKey)
                 .WithIdentity("ParseProductJob-trigger")
                 .StartNow()
@@ -45,7 +45,7 @@ public static class Startup
                 .WithSimpleSchedule(x => x
                     .WithIntervalInMinutes(30)
                     .RepeatForever())
-                .StartAt(DateBuilder.FutureDate(5, IntervalUnit.Second)));*/
+                .StartAt(DateBuilder.FutureDate(5, IntervalUnit.Second)));
         });
 
         services.AddQuartzHostedService(opt => { opt.WaitForJobsToComplete = true; });

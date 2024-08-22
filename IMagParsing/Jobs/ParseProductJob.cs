@@ -8,7 +8,7 @@ public class ParseProductJob(IProductParser parser, IProductService productServi
 {
     public async Task Execute(IJobExecutionContext context)
     {
-        foreach (var url in UrlData.ParsingUrls)
+        foreach (var url in UrlDataConfig.ParsingUrls)
             try
             {
                 var products = await parser.ParseImagProducts(url);

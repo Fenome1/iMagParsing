@@ -10,6 +10,7 @@ public sealed class ProductsContext : DbContext
     }
 
     public DbSet<ProductParsing> ProductParsings => Set<ProductParsing>();
+    public DbSet<User> Users => Set<User>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -46,6 +47,17 @@ public sealed class ProductsContext : DbContext
                     .HasColumnType("integer");
             }
         );
+
+        modelBuilder.Entity<User>(entity =>
+        {
+            entity.ToTable("User");
+
+            entity.HasKey(e => e.UserId);
+
+            entity.Property(e => e.IsSubscribe)
+                .HasDefaultValue(false);
+        });
+
         base.OnModelCreating(modelBuilder);
     }
 }

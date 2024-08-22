@@ -1,6 +1,6 @@
 ﻿namespace IMagParsing.Common.Config;
 
-public static class UrlData
+public static class UrlDataConfig
 {
     public static string[] ParsingUrls =>
     [

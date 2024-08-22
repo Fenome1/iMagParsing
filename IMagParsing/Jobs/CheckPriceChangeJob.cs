@@ -1,10 +1,14 @@
 ﻿using IMagParsing.Common.Interfaces;
+using IMagParsing.Common.Interfaces.Bot;
 using IMagParsing.Core.Enums;
 using Quartz;
 
 namespace IMagParsing.Jobs;
 
-public class CheckPriceChangeJob(IProductService productService) : IJob
+public class CheckPriceChangeJob(
+    IProductService productService,
+    IMessageBuilder messageBuilder,
+    ISendHandler sendHandler) : IJob
 {
     public async Task Execute(IJobExecutionContext context)
     {
@@ -20,25 +24,13 @@ public class CheckPriceChangeJob(IProductService productService) : IJob
             .OrderBy(p => p.ProductName)
             .ThenBy(p => p.StorageSize)
             .ThenBy(p => p.Price)
-            .ToList();
+            .ToArray();
 
-        foreach (var newProduct in newProducts)
-        {
-            var previousProduct = lastProducts
-                .FirstOrDefault(p => p.ProductName == newProduct.ProductName
-                                     && p.ColorType == newProduct.ColorType
-                                     && p.StorageSize == newProduct.StorageSize);
+        var priceChangeMessage = messageBuilder.BuildPriceChangeMessage(lastProducts, newProducts);
 
-            if (previousProduct is null || previousProduct.Price == newProduct.Price) continue;
-
-            var priceDifference = newProduct.Price - previousProduct.Price;
-            var priceChange = priceDifference > 0 ? "increased" : "decreased";
-
-            Console.WriteLine(
-                $"Продукт {newProduct.ProductName} ({newProduct.ColorType}, {newProduct.StorageSize}) price {priceChange} from " +
-                $"{previousProduct.Price} to {newProduct.Price} by {Math.Abs(priceDifference)}.");
-        }
-
+        if (!string.IsNullOrWhiteSpace(priceChangeMessage))
+            await sendHandler.NotifyAsync(priceChangeMessage);
+            
         await productService.ChangeActualProducts();
     }
 }

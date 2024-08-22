@@ -8,10 +8,14 @@ namespace IMagParsing.Services;
 public class UserService(ProductsContext context) : IUserService
 {
     public async Task<User[]> GetAllUsers()
-        => await context.Users.ToArrayAsync();
+    {
+        return await context.Users.ToArrayAsync();
+    }
 
     public async Task<User[]> GetSubscribeUsers()
-        => await context.Users.Where(u => u.IsSubscribe == true).ToArrayAsync();
+    {
+        return await context.Users.Where(u => u.IsSubscribe == true).ToArrayAsync();
+    }
 
     public async Task AddUserAsync(User user)
     {
@@ -42,5 +46,7 @@ public class UserService(ProductsContext context) : IUserService
     }
 
     private async Task<bool> IsUserExists(long userId)
-        => context.Users.Any(u => u.UserId == userId);
+    {
+        return context.Users.Any(u => u.UserId == userId);
+    }
 }

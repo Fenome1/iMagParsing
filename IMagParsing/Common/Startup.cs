@@ -5,6 +5,7 @@ using IMagParsing.Common.Interfaces.Bot;
 using IMagParsing.Infrastructure;
 using IMagParsing.Jobs;
 using IMagParsing.Services;
+using IMagParsing.Services.Bot;
 using IMagParsing.Services.Bot.Handlers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;

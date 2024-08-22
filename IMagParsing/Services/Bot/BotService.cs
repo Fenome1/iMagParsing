@@ -1,9 +1,8 @@
-﻿using IMagParsing.Common.Interfaces;
-using IMagParsing.Common.Interfaces.Bot;
+﻿using IMagParsing.Common.Interfaces.Bot;
 using Telegram.Bot;
 using Telegram.Bot.Polling;
 
-namespace IMagParsing.Services;
+namespace IMagParsing.Services.Bot;
 
 public class BotService(ITelegramBotClient botClient, IUpdateHandler updateHandler) : IBotService
 {
@@ -13,7 +12,7 @@ public class BotService(ITelegramBotClient botClient, IUpdateHandler updateHandl
         {
             botClient.StartReceiving(updateHandler,
                 new ReceiverOptions(),
-                cancellationToken: default);
+                default);
         }
         catch (Exception e)
         {

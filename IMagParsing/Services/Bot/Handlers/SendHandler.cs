@@ -10,9 +10,8 @@ public class SendHandler(ITelegramBotClient botClient, IUserService userService)
     public async Task NotifyAsync(string message)
     {
         var subscribers = await userService.GetSubscribeUsers();
-        
+
         foreach (var subscriber in subscribers)
-        {
             try
             {
                 await botClient.SendTextMessageAsync(subscriber.UserId, message);
@@ -25,7 +24,6 @@ public class SendHandler(ITelegramBotClient botClient, IUserService userService)
             {
                 Console.WriteLine($"Ошибка при отправке сообщения пользователю {subscriber.UserId}: {ex.Message}");
             }
-        }
     }
 
     public async Task SendMessage(long userId, string message)

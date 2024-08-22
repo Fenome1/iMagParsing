@@ -1,6 +1,4 @@
-﻿using IMagParsing.Core.Models;
-
-namespace IMagParsing.Common.Interfaces.Bot;
+﻿namespace IMagParsing.Common.Interfaces.Bot;
 
 public interface ISendHandler
 {

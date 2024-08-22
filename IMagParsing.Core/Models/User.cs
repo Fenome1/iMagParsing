@@ -1,8 +1,7 @@
 ﻿namespace IMagParsing.Core.Models;
 
-public class User
+public class User(long userId)
 {
-    public long UserId { get; set; }
-    public string? Username { get; set; }
+    public long UserId { get; set; } = userId;
     public bool IsSubscribe { get; set; }
 }

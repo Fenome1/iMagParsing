@@ -32,12 +32,19 @@ public static class Startup
             q.AddTrigger(opts => opts
                 .ForJob(parseJobKey)
                 .WithIdentity("ParseProductJob-trigger")
-                .WithCronSchedule("0 16 12 * * ?"));
+                .StartNow()
+                .WithSimpleSchedule(x => x
+                    .WithIntervalInSeconds(15)
+                    .RepeatForever()));
 
             q.AddTrigger(opts => opts
                 .ForJob(checkPriceChangeJobKey)
                 .WithIdentity("CheckPriceChangeJob-trigger")
-                .WithCronSchedule("5 16 12 * * ?"));
+                .StartNow()
+                .WithSimpleSchedule(x => x
+                    .WithIntervalInSeconds(15)
+                    .RepeatForever())
+                .StartAt(DateBuilder.FutureDate(5, IntervalUnit.Second)));
         });
 
         services.AddQuartzHostedService(opt => { opt.WaitForJobsToComplete = true; });

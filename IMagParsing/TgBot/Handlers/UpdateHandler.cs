@@ -38,12 +38,12 @@ public class UpdateHandler(IMediator mediator) : IUpdateHandler
 
         switch (command)
         {
-            case BotsCommand.Subscribe:
-            case BotsCommand.Unsubscribe:
-            case BotsCommand.Start:
+            case Common.Enums.BotCommand.Subscribe:
+            case Common.Enums.BotCommand.Unsubscribe:
+            case Common.Enums.BotCommand.Start:
                 await mediator.Send(new SubscriptionCommand(command, userId), cancellationToken);
                 break;
-            case BotsCommand.Check:
+            case Common.Enums.BotCommand.Check:
                 await mediator.Send(new CheckProductsCommand(userId), cancellationToken);
                 break;
         }

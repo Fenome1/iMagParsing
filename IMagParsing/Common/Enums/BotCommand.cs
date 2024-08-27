@@ -1,6 +1,6 @@
 ﻿namespace IMagParsing.Common.Enums;
 
-public enum BotsCommand
+public enum BotCommand
 {
     Subscribe,
     Unsubscribe,

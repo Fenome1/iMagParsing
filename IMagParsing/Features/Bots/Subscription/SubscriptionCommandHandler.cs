@@ -11,7 +11,7 @@ public class SubscriptionCommandHandler(IUserRepository userRepository, ISendHan
 {
     public async Task Handle(SubscriptionCommand request, CancellationToken cancellationToken)
     {
-        var isSubscribing = request.Command is BotsCommand.Start or BotsCommand.Subscribe;
+        var isSubscribing = request.Command is BotCommand.Start or BotCommand.Subscribe;
 
         var user = await userRepository.GetUser(request.UserId);
 

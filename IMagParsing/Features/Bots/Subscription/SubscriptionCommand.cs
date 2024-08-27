@@ -3,4 +3,4 @@ using MediatR;
 
 namespace IMagParsing.Features.Bots.Subscription;
 
-public record SubscriptionCommand(BotsCommand Command, long UserId) : IRequest;
+public record SubscriptionCommand(BotCommand Command, long UserId) : IRequest;

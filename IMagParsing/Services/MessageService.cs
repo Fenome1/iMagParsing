@@ -16,7 +16,7 @@ public class MessageService : IMessageService
 
             var message = $"📱 Название: {product.ProductName}\n" +
                           $"🎨 Цвет: {product.ColorType}\n" +
-                          $"💿 Размер: {product.StorageSize}.\n\n" +
+                          $"💿 Размер: {product.StorageSize}.\n" +
                           $"💸 Старая цена: {FormatPrice(product.OldPrice)} Руб.\n" +
                           $"💵 Новая цена: {FormatPrice(product.CurrentPrice)} Руб.\n" +
                           $"{priceChange} на {FormatPrice(product.Deference)} Руб.\n";
@@ -41,14 +41,14 @@ public class MessageService : IMessageService
         return string.Join("\n", formattedList);
     }
 
-    private string FormatPrice(decimal price)
+    private static string FormatPrice(decimal price)
     {
         return price
             .ToString("N2", CultureInfo.InvariantCulture)
             .Replace(",", " ");
     }
 
-    private int ExtractStorageSize(string storageSize)
+    public int ExtractStorageSize(string storageSize)
     {
         var sizeDigits = new string(storageSize.Where(char.IsDigit).ToArray());
         return int.TryParse(sizeDigits, out var size) ? size : 0;

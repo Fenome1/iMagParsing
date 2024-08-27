@@ -7,6 +7,8 @@ namespace IMagParsing.Services.Bot.Handlers;
 
 public class SendHandler(ITelegramBotClient botClient, IUserService userService) : ISendHandler
 {
+    private const int MaxMessageLength = 4096;
+
     public async Task NotifyAsync(string message)
     {
         var subscribers = await userService.GetSubscribeUsers();
@@ -26,15 +28,37 @@ public class SendHandler(ITelegramBotClient botClient, IUserService userService)
             }
     }
 
-    public async Task SendMessage(long userId, string message)
+    public async Task SendMessage(long userId, string message, CancellationToken cancellationToken)
     {
         try
         {
-            await botClient.SendTextMessageAsync(userId, message);
+            if (message.Length <= MaxMessageLength)
+            {
+                await botClient.SendTextMessageAsync(userId, message,
+                    cancellationToken: cancellationToken);
+            }
+            else
+            {
+                var messageParts = SplitMessage(message, MaxMessageLength);
+
+                foreach (var part in messageParts)
+                {
+                    await botClient.SendTextMessageAsync(userId, part,
+                        cancellationToken: cancellationToken);
+                    await Task.Delay(500, cancellationToken);
+                }
+            }
         }
         catch (Exception ex)
         {
             Console.WriteLine($"Ошибка при отправке сообщения пользователю {userId}: {ex.Message}");
         }
+    }
+
+    private static IEnumerable<string> SplitMessage(string message, int maxLength)
+    {
+        for (var i = 0; i < message.Length; i += maxLength)
+            yield return message.Substring(i, Math.Min(maxLength,
+                message.Length - i));
     }
 }

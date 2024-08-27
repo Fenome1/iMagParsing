@@ -19,12 +19,12 @@ public class UpdateHandler(
     public async Task HandleUpdateAsync(ITelegramBotClient botClient, Update update,
         CancellationToken cancellationToken)
     {
-        if (update.Type == UpdateType.Message && update.Message != null)
+        if (update is { Type: UpdateType.Message, Message: not null })
         {
             var message = update.Message;
             var userId = message.From.Id;
 
-            if (message.Text != null) await HandleCommandAsync(botClient, message, userId, cancellationToken);
+            if (message.Text != null) await HandleCommandAsync(message, userId, cancellationToken);
         }
     }
 
@@ -35,16 +35,16 @@ public class UpdateHandler(
         return Task.CompletedTask;
     }
 
-    private async Task HandleCommandAsync(ITelegramBotClient botClient, Message message, long userId,
+    private async Task HandleCommandAsync(Message message, long userId,
         CancellationToken cancellationToken)
     {
-        if (IsSubscriptionCommand(message.Text))
+        if (IsSubscriptionHandleCommand(message.Text))
             await HandleSubscriptionAsync(message.Text, userId, cancellationToken);
         else if (message.Text.StartsWith("/check", StringComparison.OrdinalIgnoreCase))
             await HandleCheckCommandAsync(userId, cancellationToken);
     }
 
-    private bool IsSubscriptionCommand(string text)
+    private static bool IsSubscriptionHandleCommand(string text)
     {
         return text.StartsWith("/subscribe", StringComparison.OrdinalIgnoreCase) ||
                text.StartsWith("/unsubscribe", StringComparison.OrdinalIgnoreCase) ||
@@ -84,36 +84,16 @@ public class UpdateHandler(
             .ThenBy(p => p.StorageSize)
             .ToArray();
 
-        var responseMessage = !groupedProducts.Any()
+        var responseMessage = groupedProducts.Length == 0
             ? "Актуальные продукты не найдены"
             : messageBuilder.BuildFormattedProductList(groupedProducts);
 
         await SendMessageAsync(userId, responseMessage, cancellationToken);
     }
 
-    private async Task SendMessageAsync(long userId, string message, CancellationToken cancellationToken)
+    private async Task SendMessageAsync(long userId, string message,
+        CancellationToken cancellationToken)
     {
-        const int maxMessageLength = 4096;
-
-        if (message.Length <= maxMessageLength)
-        {
-            await sendHandler.SendMessage(userId, message);
-        }
-        else
-        {
-            var messageParts = SplitMessage(message, maxMessageLength);
-
-            foreach (var part in messageParts)
-            {
-                await sendHandler.SendMessage(userId, part);
-                await Task.Delay(500);
-            }
-        }
-    }
-
-    private IEnumerable<string> SplitMessage(string message, int maxLength)
-    {
-        for (var i = 0; i < message.Length; i += maxLength)
-            yield return message.Substring(i, Math.Min(maxLength, message.Length - i));
+        await sendHandler.SendMessage(userId, message, cancellationToken);
     }
 }

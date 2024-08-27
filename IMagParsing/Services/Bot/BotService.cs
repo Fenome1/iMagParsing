@@ -15,11 +15,7 @@ public class BotService(ITelegramBotClient botClient, IUpdateHandler updateHandl
         }
         catch (Exception e)
         {
-            Console.WriteLine(e);
+            Console.WriteLine(e.Message);
         }
-    }
-
-    public void Stop()
-    {
     }
 }

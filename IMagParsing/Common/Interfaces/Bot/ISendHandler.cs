@@ -3,5 +3,5 @@
 public interface ISendHandler
 {
     Task NotifyAsync(string message);
-    Task SendMessage(long userId, string message);
+    Task SendMessage(long userId, string message, CancellationToken cancellationToken);
 }

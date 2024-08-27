@@ -17,7 +17,7 @@ public class CheckPriceChangeJob(
         {
             var changedProducts = await GetPriceChangedProducts();
 
-            if (!changedProducts.Any())
+            if (changedProducts?.Length is 0)
                 return;
 
             var message = messageBuilder.BuildPriceChangeMessage(changedProducts);
@@ -31,11 +31,11 @@ public class CheckPriceChangeJob(
         }
     }
 
-    private async Task<PriceChangedProduct[]> GetPriceChangedProducts()
+    private async Task<PriceChangedProduct[]?> GetPriceChangedProducts()
     {
         var lastProducts = await productService.GetProductsByStatus(ActualStatus.Last);
 
-        if (!lastProducts.Any())
+        if (lastProducts.Length == 0)
         {
             await productService.ChangeActualProducts();
             return [];

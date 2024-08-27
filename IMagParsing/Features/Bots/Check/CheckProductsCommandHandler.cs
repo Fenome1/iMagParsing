@@ -36,6 +36,6 @@ public class CheckProductsCommandHandler(
             ? "Актуальные продукты не найдены"
             : messageService.BuildFormattedProductList(groupedProducts);
 
-        await sendHandler.SendMessage(request.UserId, responseMessage, cancellationToken);
+        await sendHandler.SendTextMessage(request.UserId, responseMessage, cancellationToken);
     }
 }

@@ -60,6 +60,7 @@ public static class Startup
         services.AddTransient<IUserRepository, UserRepository>();
         services.AddTransient<IMessageService, MessageService>();
 
+        services.AddSingleton<IUserStateService, UserStateService>();
         services.AddSingleton<HtmlWeb>();
 
         services.ConfigureTelegramBot(configuration);

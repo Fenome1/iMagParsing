@@ -1,4 +1,5 @@
 ﻿using IMagParsing.Common.Enums;
+using IMagParsing.Features.Bots.Chart.Model;
 using IMagParsing.Features.Bots.Check;
 using IMagParsing.Features.Bots.Subscription;
 using MediatR;
@@ -45,6 +46,9 @@ public class UpdateHandler(IMediator mediator) : IUpdateHandler
                 break;
             case Common.Enums.BotCommand.Check:
                 await mediator.Send(new CheckProductsCommand(userId), cancellationToken);
+                break;
+            case Common.Enums.BotCommand.Chart:
+                await mediator.Send(new SendModelButtonStepCommand(userId), cancellationToken);
                 break;
         }
     }

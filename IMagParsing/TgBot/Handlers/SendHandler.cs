@@ -1,6 +1,7 @@
 ﻿using IMagParsing.TgBot.Handlers.Interfaces;
 using Telegram.Bot;
 using Telegram.Bot.Exceptions;
+using Telegram.Bot.Types.ReplyMarkups;
 
 namespace IMagParsing.TgBot.Handlers;
 
@@ -8,13 +9,15 @@ public class SendHandler(ITelegramBotClient botClient) : ISendHandler
 {
     private const int MaxMessageLength = 4096;
 
-    public async Task SendMessage(long userId, string message, CancellationToken cancellationToken)
+    public async Task SendTextMessage(long userId, string message, CancellationToken cancellationToken = default,
+        IReplyMarkup? replyMarkup = null)
     {
         try
         {
             if (message.Length <= MaxMessageLength)
             {
                 await botClient.SendTextMessageAsync(userId, message,
+                    replyMarkup: replyMarkup,
                     cancellationToken: cancellationToken);
             }
             else

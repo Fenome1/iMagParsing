@@ -1,8 +1,8 @@
-﻿using IMagParsing.Bot.Interfaces;
+﻿using IMagParsing.TgBot.Handlers.Interfaces;
 using Telegram.Bot;
 using Telegram.Bot.Exceptions;
 
-namespace IMagParsing.Bot.Handlers;
+namespace IMagParsing.TgBot.Handlers;
 
 public class SendHandler(ITelegramBotClient botClient) : ISendHandler
 {

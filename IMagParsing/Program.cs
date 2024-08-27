@@ -1,6 +1,6 @@
-﻿using IMagParsing.Bot.Interfaces;
-using IMagParsing.Common;
+﻿using IMagParsing.Common;
 using IMagParsing.Infrastructure;
+using IMagParsing.TgBot;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

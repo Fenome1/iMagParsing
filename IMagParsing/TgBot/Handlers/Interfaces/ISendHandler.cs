@@ -1,4 +1,4 @@
-﻿namespace IMagParsing.Bot.Interfaces;
+﻿namespace IMagParsing.TgBot.Handlers.Interfaces;
 
 public interface ISendHandler
 {

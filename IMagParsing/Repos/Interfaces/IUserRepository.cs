@@ -1,6 +1,6 @@
 ﻿using IMagParsing.Core.Models;
 
-namespace IMagParsing.Common.Interfaces.Repos;
+namespace IMagParsing.Repos.Interfaces;
 
 public interface IUserRepository
 {

@@ -1,5 +1,5 @@
-﻿using IMagParsing.Common.Interfaces.Repos;
-using IMagParsing.Core.Models;
+﻿using IMagParsing.Core.Models;
+using IMagParsing.Repos.Interfaces;
 using MediatR;
 
 namespace IMagParsing.Features.Products.Queries.GetByStatus;

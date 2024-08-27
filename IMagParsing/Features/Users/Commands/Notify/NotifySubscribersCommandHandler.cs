@@ -1,4 +1,4 @@
-﻿using IMagParsing.Common.Interfaces.Repos;
+﻿using IMagParsing.Repos.Interfaces;
 using MediatR;
 using Telegram.Bot;
 using Telegram.Bot.Exceptions;

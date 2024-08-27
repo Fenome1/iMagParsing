@@ -1,5 +1,5 @@
 ﻿using System.Globalization;
-using IMagParsing.Common.Interfaces.Services;
+using IMagParsing.Services.Interfaces;
 using IMagParsing.ViewModels;
 
 namespace IMagParsing.Services;

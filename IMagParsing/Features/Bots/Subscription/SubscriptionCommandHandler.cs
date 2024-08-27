@@ -1,7 +1,7 @@
-﻿using IMagParsing.Bot.Interfaces;
-using IMagParsing.Common.Enums;
-using IMagParsing.Common.Interfaces.Repos;
+﻿using IMagParsing.Common.Enums;
 using IMagParsing.Core.Models;
+using IMagParsing.Repos.Interfaces;
+using IMagParsing.TgBot.Handlers.Interfaces;
 using MediatR;
 
 namespace IMagParsing.Features.Bots.Subscription;

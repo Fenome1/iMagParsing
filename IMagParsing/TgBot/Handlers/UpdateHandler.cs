@@ -6,9 +6,9 @@ using Telegram.Bot;
 using Telegram.Bot.Polling;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
-using BotCommand = IMagParsing.Services.Helpers.BotCommand;
+using BotCommand = IMagParsing.Helpers.BotCommand;
 
-namespace IMagParsing.Bot.Handlers;
+namespace IMagParsing.TgBot.Handlers;
 
 public class UpdateHandler(IMediator mediator) : IUpdateHandler
 {

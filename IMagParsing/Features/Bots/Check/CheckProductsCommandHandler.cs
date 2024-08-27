@@ -1,8 +1,8 @@
-﻿using IMagParsing.Bot.Interfaces;
-using IMagParsing.Common.Interfaces.Repos;
-using IMagParsing.Common.Interfaces.Services;
-using IMagParsing.Core.Enums;
+﻿using IMagParsing.Core.Enums;
 using IMagParsing.Features.Products.Queries.GetByStatus;
+using IMagParsing.Repos.Interfaces;
+using IMagParsing.Services.Interfaces;
+using IMagParsing.TgBot.Handlers.Interfaces;
 using IMagParsing.ViewModels;
 using MediatR;
 

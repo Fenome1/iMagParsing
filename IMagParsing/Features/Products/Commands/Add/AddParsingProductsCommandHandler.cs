@@ -1,5 +1,5 @@
-﻿using IMagParsing.Common.Interfaces.Repos;
-using IMagParsing.Core.Enums;
+﻿using IMagParsing.Core.Enums;
+using IMagParsing.Repos.Interfaces;
 using MediatR;
 
 namespace IMagParsing.Features.Products.Commands.Add;

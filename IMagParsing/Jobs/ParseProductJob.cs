@@ -1,6 +1,6 @@
 ﻿using IMagParsing.Common.Config;
-using IMagParsing.Common.Interfaces.Services;
 using IMagParsing.Features.Products.Commands.Add;
+using IMagParsing.Services.Interfaces;
 using MediatR;
 using Quartz;
 

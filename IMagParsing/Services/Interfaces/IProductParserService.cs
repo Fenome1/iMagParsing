@@ -1,6 +1,6 @@
 ﻿using IMagParsing.Core.Models;
 
-namespace IMagParsing.Common.Interfaces.Services;
+namespace IMagParsing.Services.Interfaces;
 
 public interface IProductParserService
 {

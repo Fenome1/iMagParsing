@@ -1,6 +1,6 @@
-﻿using IMagParsing.Common.Interfaces.Services;
-using IMagParsing.Features.Products.Queries.GetPriceChanged;
+﻿using IMagParsing.Features.Products.Queries.GetPriceChanged;
 using IMagParsing.Features.Users.Commands.Notify;
+using IMagParsing.Services.Interfaces;
 using MediatR;
 using Quartz;
 

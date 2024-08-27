@@ -1,6 +1,6 @@
 ﻿using IMagParsing.ViewModels;
 
-namespace IMagParsing.Common.Interfaces.Services;
+namespace IMagParsing.Services.Interfaces;
 
 public interface IMessageService
 {

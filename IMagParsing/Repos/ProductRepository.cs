@@ -1,7 +1,7 @@
-﻿using IMagParsing.Common.Interfaces.Repos;
-using IMagParsing.Core.Models;
+﻿using IMagParsing.Core.Models;
 using IMagParsing.Infrastructure;
 using IMagParsing.Infrastructure.Common.Extentions;
+using IMagParsing.Repos.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace IMagParsing.Repos;

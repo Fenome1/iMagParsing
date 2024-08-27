@@ -1,6 +1,6 @@
 ﻿using HtmlAgilityPack;
-using IMagParsing.Common.Interfaces.Services;
 using IMagParsing.Core.Models;
+using IMagParsing.Services.Interfaces;
 
 namespace IMagParsing.Services;
 

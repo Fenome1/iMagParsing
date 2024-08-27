@@ -1,4 +1,4 @@
-﻿using IMagParsing.Common.Enums;
+﻿using IMagParsing.Features.Bots.Chart;
 using IMagParsing.Features.Bots.Chart.Model;
 using IMagParsing.Features.Bots.Check;
 using IMagParsing.Features.Bots.Subscription;
@@ -16,13 +16,24 @@ public class UpdateHandler(IMediator mediator) : IUpdateHandler
     public async Task HandleUpdateAsync(ITelegramBotClient botClient, Update update,
         CancellationToken cancellationToken)
     {
-        if (update is { Type: UpdateType.Message, Message: not null })
+        switch (update)
         {
-            var message = update.Message;
-            var userId = message.From.Id;
+            case { Type: UpdateType.Message, Message: not null }:
+            {
+                var message = update.Message;
+                var userId = message.From.Id;
 
-            if (message.Text != null)
-                await HandleCommandAsync(message, userId, cancellationToken);
+                if (message.Text != null)
+                    await HandleCommandAsync(message, userId, cancellationToken);
+                break;
+            }
+            case { Type: UpdateType.CallbackQuery, CallbackQuery: not null }:
+            {
+                var userId = update.CallbackQuery.From.Id;
+                await mediator.Send(new ChartHandleCommand(userId, update.CallbackQuery),
+                    cancellationToken);
+                break;
+            }
         }
     }
 

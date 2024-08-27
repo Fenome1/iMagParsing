@@ -14,9 +14,9 @@ public class UserStateService : IUserStateService
         return state;
     }
 
-    public void SaveUserStateAsync(long userId, UserState state)
+    public void SaveUserState(UserState state)
     {
-        _userStates[userId] = state;
+        _userStates[state.UserId] = state;
     }
 
     public void DeleteUserStateAsync(long userId)

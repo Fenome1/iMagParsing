@@ -15,11 +15,6 @@ public class SendModelButtonStepCommandHandler(
 {
     public async Task Handle(SendModelButtonStepCommand request, CancellationToken cancellationToken)
     {
-        var userState = userStateService.Get(request.UserId);
-
-        if (userState is not null)
-            userStateService.DeleteUserStateAsync(request.UserId);
-
         var lastMonthProducts = await productRepository.GetLastMonth();
 
         var newUserState = new UserState()
@@ -28,6 +23,8 @@ public class SendModelButtonStepCommandHandler(
             CurrentStep = ChartStep.Model,
             LastMonthProducts = lastMonthProducts
         };
+        
+        userStateService.SaveUserState(newUserState);
 
         var productModels = newUserState
             .LastMonthProducts.Select(p => p.ProductName).Distinct();

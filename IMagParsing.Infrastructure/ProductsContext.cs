@@ -55,7 +55,7 @@ public sealed class ProductsContext : DbContext
             entity.HasKey(e => e.UserId);
 
             entity.Property(e => e.IsSubscribe)
-                .HasDefaultValue(false);
+                .HasDefaultValue(true);
         });
 
         base.OnModelCreating(modelBuilder);

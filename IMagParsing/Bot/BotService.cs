@@ -1,8 +1,8 @@
-﻿using IMagParsing.Common.Interfaces.Bot;
+﻿using IMagParsing.Bot.Interfaces;
 using Telegram.Bot;
 using Telegram.Bot.Polling;
 
-namespace IMagParsing.Services.Bot;
+namespace IMagParsing.Bot;
 
 public class BotService(ITelegramBotClient botClient, IUpdateHandler updateHandler) : IBotService
 {

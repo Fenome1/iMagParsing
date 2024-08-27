@@ -1,12 +1,14 @@
 ﻿using HtmlAgilityPack;
+using IMagParsing.Bot;
+using IMagParsing.Bot.Handlers;
+using IMagParsing.Bot.Interfaces;
 using IMagParsing.Common.Config;
-using IMagParsing.Common.Interfaces;
-using IMagParsing.Common.Interfaces.Bot;
+using IMagParsing.Common.Interfaces.Repos;
+using IMagParsing.Common.Interfaces.Services;
 using IMagParsing.Infrastructure;
 using IMagParsing.Jobs;
+using IMagParsing.Repos;
 using IMagParsing.Services;
-using IMagParsing.Services.Bot;
-using IMagParsing.Services.Bot.Handlers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -53,14 +55,17 @@ public static class Startup
 
     public static void ConfigureServices(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddTransient<IProductParser, ProductParser>();
-        services.AddTransient<IProductService, ProductService>();
-        services.AddTransient<IUserService, UserService>();
-        services.AddTransient<IMessageBuilder, MessageBuilder>();
+        services.AddTransient<IProductParserService, ProductParserService>();
+        services.AddTransient<IProductRepository, ProductRepository>();
+        services.AddTransient<IUserRepository, UserRepository>();
+        services.AddTransient<IMessageService, MessageService>();
 
         services.AddSingleton<HtmlWeb>();
 
         services.ConfigureTelegramBot(configuration);
+
+        services.AddMediatR(cfg =>
+            cfg.RegisterServicesFromAssembly(typeof(Startup).Assembly));
     }
 
     public static void ConfigureDbContext(this IServiceCollection services, HostBuilderContext context)

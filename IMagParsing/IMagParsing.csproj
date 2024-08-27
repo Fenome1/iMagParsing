@@ -10,6 +10,9 @@
 
     <ItemGroup>
         <PackageReference Include="HtmlAgilityPack" Version="1.11.64"/>
+        <PackageReference Include="Mapster" Version="7.4.0"/>
+        <PackageReference Include="MediatR" Version="12.4.0"/>
+        <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.1.0"/>
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.8">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -38,6 +41,10 @@
         <Content Include="..\.dockerignore">
             <Link>.dockerignore</Link>
         </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Folder Include="Features\Users\Commands\"/>
     </ItemGroup>
 
 </Project>

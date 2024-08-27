@@ -1,10 +1,10 @@
 ﻿using System.Globalization;
-using IMagParsing.Common.Interfaces;
+using IMagParsing.Common.Interfaces.Services;
 using IMagParsing.ViewModels;
 
 namespace IMagParsing.Services;
 
-public class MessageBuilder : IMessageBuilder
+public class MessageService : IMessageService
 {
     public string BuildPriceChangeMessage(PriceChangedProduct[] products)
     {

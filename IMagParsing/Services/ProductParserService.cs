@@ -1,10 +1,10 @@
 ﻿using HtmlAgilityPack;
-using IMagParsing.Common.Interfaces;
+using IMagParsing.Common.Interfaces.Services;
 using IMagParsing.Core.Models;
 
 namespace IMagParsing.Services;
 
-public class ProductParser(HtmlWeb htmlWeb) : IProductParser
+public class ProductParserService(HtmlWeb htmlWeb) : IProductParserService
 {
     public async Task<ProductParsing[]> ParseImagProducts(string url)
     {

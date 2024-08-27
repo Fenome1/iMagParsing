@@ -1,8 +1,8 @@
 ﻿using IMagParsing.ViewModels;
 
-namespace IMagParsing.Common.Interfaces;
+namespace IMagParsing.Common.Interfaces.Services;
 
-public interface IMessageBuilder
+public interface IMessageService
 {
     string BuildPriceChangeMessage(PriceChangedProduct[] products);
     string BuildFormattedProductList(ProductGroup[] products);

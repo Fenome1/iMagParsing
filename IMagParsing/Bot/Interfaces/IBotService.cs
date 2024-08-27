@@ -1,4 +1,4 @@
-﻿namespace IMagParsing.Common.Interfaces.Bot;
+﻿namespace IMagParsing.Bot.Interfaces;
 
 public interface IBotService
 {

@@ -72,7 +72,7 @@ namespace IMagParsing.Infrastructure.Migrations
                     b.Property<bool>("IsSubscribe")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("boolean")
-                        .HasDefaultValue(false);
+                        .HasDefaultValue(true);
 
                     b.HasKey("UserId");
 

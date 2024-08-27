@@ -22,6 +22,7 @@ services:
       - ASPNETCORE_ENVIRONMENT=Production
     ports:
       - "8080:8080"
+    restart: always
 
 volumes:
   postgres_data:

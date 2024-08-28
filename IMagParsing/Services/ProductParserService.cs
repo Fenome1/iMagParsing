@@ -6,7 +6,7 @@ namespace IMagParsing.Services;
 
 public class ProductParserService(HtmlWeb htmlWeb) : IProductParserService
 {
-    public async Task<ProductParsing[]> ParseImagProducts(string url)
+    public async Task<ProductParsing[]> ParseImagProductsAsync(string url)
     {
         var doc = await htmlWeb.LoadFromWebAsync(url);
 

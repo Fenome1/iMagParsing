@@ -11,7 +11,7 @@ public class SendStorageButtonStepCommandHandler(ISendHandler sendHandler, IUser
 {
     public async Task Handle(SendStorageButtonStepCommand request, CancellationToken cancellationToken)
     {
-        var userState = await userStateService.Get(request.UserId);
+        var userState = await userStateService.GetAsync(request.UserId);
 
         var productStorages = userState.LastMonthProducts
             .Where(p => p.ProductName == userState.ProductInfo.ProductName)
@@ -25,7 +25,7 @@ public class SendStorageButtonStepCommandHandler(ISendHandler sendHandler, IUser
 
         var inlineKeyboard = new InlineKeyboardMarkup(buttons.Select(b => new[] { b }));
 
-        await sendHandler.SendTextMessage(request.UserId, "Укажите объем памяти:",
+        await sendHandler.SendTextMessageAsync(request.UserId, "Укажите объем памяти:",
             replyMarkup: inlineKeyboard, cancellationToken: cancellationToken);
     }
 }

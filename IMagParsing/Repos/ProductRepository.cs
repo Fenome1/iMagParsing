@@ -8,7 +8,7 @@ namespace IMagParsing.Repos;
 
 public class ProductRepository(ProductsContext context) : IProductRepository
 {
-    public async Task AddProducts(ProductParsing[] products, CancellationToken cancellationToken)
+    public async Task AddProductsAsync(ProductParsing[] products, CancellationToken cancellationToken)
     {
         await context.WithTransactionAsync(async () =>
         {
@@ -17,7 +17,7 @@ public class ProductRepository(ProductsContext context) : IProductRepository
         }, cancellationToken);
     }
 
-    public async Task Update(ProductParsing[] products, CancellationToken cancellationToken)
+    public async Task UpdateAsync(ProductParsing[] products, CancellationToken cancellationToken)
     {
         await context.WithTransactionAsync(async () =>
         {
@@ -26,13 +26,13 @@ public class ProductRepository(ProductsContext context) : IProductRepository
         }, cancellationToken);
     }
 
-    public async Task<ProductParsing[]> Get()
+    public async Task<ProductParsing[]> GetAsync()
     {
         return await context.ProductParsings
             .ToArrayAsync();
     }
 
-    public async Task<ProductParsing[]> GetLastMonth()
+    public async Task<ProductParsing[]> GetLastMonthAsync()
     {
         return await context.ProductParsings
             .Where(p => p.ParsingDate >= DateTime.UtcNow.AddMonths(-1))

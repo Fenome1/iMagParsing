@@ -13,7 +13,7 @@ public class SubscriptionCommandHandler(IUserRepository userRepository, ISendHan
     {
         var isSubscribing = request.Command is BotCommand.Start or BotCommand.Subscribe;
 
-        var user = await userRepository.GetUser(request.UserId);
+        var user = await userRepository.GetUserAsync(request.UserId);
 
         if (user is null)
         {
@@ -27,18 +27,18 @@ public class SubscriptionCommandHandler(IUserRepository userRepository, ISendHan
                     ? "Вы уже подписаны на уведомления."
                     : "Вы уже отписаны от уведомлений.";
 
-                await sendHandler.SendTextMessage(request.UserId, alreadySubscribedMessage, cancellationToken);
+                await sendHandler.SendTextMessageAsync(request.UserId, alreadySubscribedMessage, cancellationToken);
                 return;
             }
 
             user.IsSubscribe = isSubscribing;
-            await userRepository.Update(user, cancellationToken);
+            await userRepository.UpdateAsync(user, cancellationToken);
         }
 
         var responseMessage = isSubscribing
             ? "Вы подписались на уведомления"
             : "Вы отписались от уведомлений";
 
-        await sendHandler.SendTextMessage(request.UserId, responseMessage, cancellationToken);
+        await sendHandler.SendTextMessageAsync(request.UserId, responseMessage, cancellationToken);
     }
 }

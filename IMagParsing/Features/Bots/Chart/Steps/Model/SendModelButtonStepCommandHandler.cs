@@ -15,7 +15,7 @@ public class SendModelButtonStepCommandHandler(
 {
     public async Task Handle(SendModelButtonStepCommand request, CancellationToken cancellationToken)
     {
-        var lastMonthProducts = await productRepository.GetLastMonth();
+        var lastMonthProducts = await productRepository.GetLastMonthAsync();
 
         var newUserState = new UserState
         {
@@ -24,7 +24,7 @@ public class SendModelButtonStepCommandHandler(
             LastMonthProducts = lastMonthProducts
         };
 
-        userStateService.SaveUserState(newUserState);
+        userStateService.SaveUserStateAsync(newUserState);
 
         var productModels = newUserState
             .LastMonthProducts.Select(p => p.ProductName).Distinct();
@@ -35,7 +35,7 @@ public class SendModelButtonStepCommandHandler(
 
         var inlineKeyboard = new InlineKeyboardMarkup(buttons.Select(b => new[] { b }));
 
-        await sendHandler.SendTextMessage(request.UserId, "Укажите модель:",
+        await sendHandler.SendTextMessageAsync(request.UserId, "Укажите модель:",
             replyMarkup: inlineKeyboard, cancellationToken: cancellationToken);
     }
 }

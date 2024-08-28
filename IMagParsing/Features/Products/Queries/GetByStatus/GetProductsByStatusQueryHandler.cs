@@ -9,7 +9,7 @@ public class GetProductsByStatusQueryHandler(IProductRepository productRepositor
 {
     public async Task<ProductParsing[]> Handle(GetProductsByStatusQuery request, CancellationToken cancellationToken)
     {
-        return (await productRepository.Get())
+        return (await productRepository.GetAsync())
             .Where(p => p.ActualStatus == request.Status)
             .ToArray();
     }

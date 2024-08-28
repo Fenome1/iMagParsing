@@ -10,7 +10,7 @@ public class SendHandler(ITelegramBotClient botClient) : ISendHandler
 {
     private const int MaxMessageLength = 4096;
 
-    public async Task SendTextMessage(long userId, string message, CancellationToken cancellationToken = default,
+    public async Task SendTextMessageAsync(long userId, string message, CancellationToken cancellationToken = default,
         IReplyMarkup? replyMarkup = null)
     {
         try
@@ -40,7 +40,7 @@ public class SendHandler(ITelegramBotClient botClient) : ISendHandler
         }
     }
 
-    public async Task AnswerCallbackQuery(string callbackQueryId, string? text = null, bool showAlert = false,
+    public async Task AnswerCallbackQueryAsync(string callbackQueryId, string? text = null, bool showAlert = false,
         CancellationToken cancellationToken = default)
     {
         try
@@ -58,7 +58,7 @@ public class SendHandler(ITelegramBotClient botClient) : ISendHandler
         }
     }
 
-    public async Task SendImage(long chatId, byte[] imageBytes, string caption = null,
+    public async Task SendImageAsync(long chatId, byte[] imageBytes, string caption = null,
         CancellationToken cancellationToken = default)
     {
         using var stream = new MemoryStream(imageBytes);

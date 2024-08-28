@@ -8,13 +8,13 @@ public class UserStateService : IUserStateService
 {
     private readonly ConcurrentDictionary<long, UserState> _userStates = new();
 
-    public Task<UserState?> Get(long userId)
+    public Task<UserState?> GetAsync(long userId)
     {
         _userStates.TryGetValue(userId, out var state);
         return Task.FromResult(state);
     }
 
-    public Task SaveUserState(UserState state)
+    public Task SaveUserStateAsync(UserState state)
     {
         _userStates[state.UserId] = state;
         return Task.CompletedTask;

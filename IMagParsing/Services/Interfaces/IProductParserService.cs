@@ -4,5 +4,5 @@ namespace IMagParsing.Services.Interfaces;
 
 public interface IProductParserService
 {
-    Task<ProductParsing[]> ParseImagProducts(string url);
+    Task<ProductParsing[]> ParseImagProductsAsync(string url);
 }

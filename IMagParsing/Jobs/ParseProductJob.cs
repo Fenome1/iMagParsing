@@ -14,7 +14,7 @@ public class ParseProductJob(IProductParserService parserService, IMediator medi
             try
             {
                 await mediator.Send(new AddParsingProductsCommand(
-                    await parserService.ParseImagProducts(url)));
+                    await parserService.ParseImagProductsAsync(url)));
             }
             catch (Exception e)
             {

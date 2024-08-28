@@ -6,7 +6,7 @@ namespace IMagParsing.Services;
 
 public class ChartService : IChartService
 {
-    public async Task<byte[]> GeneratePriceTrendChart(UserState userState, CancellationToken cancellationToken)
+    public async Task<byte[]> GenerateChartAsync(UserState userState, CancellationToken cancellationToken)
     {
         return await Task.Run(() =>
         {

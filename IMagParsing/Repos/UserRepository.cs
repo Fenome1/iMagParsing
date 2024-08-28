@@ -13,20 +13,20 @@ public class UserRepository(ProductsContext context) : IUserRepository
         await context.SaveChangesAsync(cancellationToken);
     }
 
-    public async Task Update(User user, CancellationToken cancellationToken)
+    public async Task UpdateAsync(User user, CancellationToken cancellationToken)
     {
         context.Users.Update(user);
         await context.SaveChangesAsync(cancellationToken);
     }
 
-    public async Task<User[]> GetSubscribers()
+    public async Task<User[]> GetSubscribersAsync()
     {
         return await context.Users
             .Where(u => u.IsSubscribe == true)
             .ToArrayAsync();
     }
 
-    public async Task<User?> GetUser(long userId)
+    public async Task<User?> GetUserAsync(long userId)
     {
         return await context.Users.FirstOrDefaultAsync(u => u.UserId == userId);
     }

@@ -4,8 +4,8 @@ namespace IMagParsing.Repos.Interfaces;
 
 public interface IUserRepository
 {
-    Task<User[]> GetSubscribers();
-    Task<User?> GetUser(long userId);
+    Task<User[]> GetSubscribersAsync();
+    Task<User?> GetUserAsync(long userId);
     Task AddUserAsync(User user, CancellationToken cancellationToken = default);
-    Task Update(User user, CancellationToken cancellationToken = default);
+    Task UpdateAsync(User user, CancellationToken cancellationToken = default);
 }

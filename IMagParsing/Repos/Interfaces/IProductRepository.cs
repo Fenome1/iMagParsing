@@ -4,8 +4,8 @@ namespace IMagParsing.Repos.Interfaces;
 
 public interface IProductRepository
 {
-    Task AddProducts(ProductParsing[] products, CancellationToken cancellationToken = default);
-    Task Update(ProductParsing[] products, CancellationToken cancellationToken = default);
-    Task<ProductParsing[]> Get();
-    Task<ProductParsing[]> GetLastMonth();
+    Task AddProductsAsync(ProductParsing[] products, CancellationToken cancellationToken = default);
+    Task UpdateAsync(ProductParsing[] products, CancellationToken cancellationToken = default);
+    Task<ProductParsing[]> GetAsync();
+    Task<ProductParsing[]> GetLastMonthAsync();
 }

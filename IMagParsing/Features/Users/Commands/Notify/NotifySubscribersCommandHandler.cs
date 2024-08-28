@@ -10,7 +10,7 @@ public class NotifySubscribersCommandHandler(IUserRepository userRepository, ITe
 {
     public async Task Handle(NotifySubscribersCommand request, CancellationToken cancellationToken)
     {
-        var subscribers = await userRepository.GetSubscribers();
+        var subscribers = await userRepository.GetSubscribersAsync();
 
         foreach (var subscriber in subscribers)
             try
@@ -21,7 +21,7 @@ public class NotifySubscribersCommandHandler(IUserRepository userRepository, ITe
             catch (ApiRequestException ex)
             {
                 subscriber.IsSubscribe = false;
-                await userRepository.Update(subscriber, cancellationToken);
+                await userRepository.UpdateAsync(subscriber, cancellationToken);
 
                 Console.WriteLine($"Ошибка при отправке оповещения подписчику " +
                                   $"{subscriber.UserId} ({ex.ErrorCode} - {ex.Message})");

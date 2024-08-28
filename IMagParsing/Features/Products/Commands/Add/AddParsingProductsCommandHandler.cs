@@ -12,6 +12,6 @@ public class AddParsingProductsCommandHandler(IProductRepository productReposito
         foreach (var productParsing in request.Products)
             productParsing.ActualStatus = ActualStatus.New;
 
-        await productRepository.AddProducts(request.Products, cancellationToken);
+        await productRepository.AddProductsAsync(request.Products, cancellationToken);
     }
 }

@@ -9,12 +9,12 @@ public class ChangeActualProductsCommandHandler(IProductRepository productReposi
 {
     public async Task Handle(ChangeActualProductsCommand request, CancellationToken cancellationToken)
     {
-        var allProducts = await productRepository.Get();
+        var allProducts = await productRepository.GetAsync();
 
         foreach (var product in allProducts)
             if (product.ActualStatus is ActualStatus.New or ActualStatus.Last)
                 product.ActualStatus--;
 
-        await productRepository.Update(allProducts, cancellationToken);
+        await productRepository.UpdateAsync(allProducts, cancellationToken);
     }
 }

@@ -4,8 +4,8 @@ namespace IMagParsing.Services.Interfaces;
 
 public interface IUserStateService
 {
-    Task<UserState?> Get(long userId);
-    Task SaveUserState(UserState state);
+    Task<UserState?> GetAsync(long userId);
+    Task SaveUserStateAsync(UserState state);
     Task DeleteUserStateAsync(long userId);
     Task ClearAllStatesAsync();
 }

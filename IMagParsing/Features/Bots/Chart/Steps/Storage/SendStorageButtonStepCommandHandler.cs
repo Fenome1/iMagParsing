@@ -11,7 +11,7 @@ public class SendStorageButtonStepCommandHandler(ISendHandler sendHandler, IUser
 {
     public async Task Handle(SendStorageButtonStepCommand request, CancellationToken cancellationToken)
     {
-        var userState = userStateService.Get(request.UserId);
+        var userState = await userStateService.Get(request.UserId);
 
         var productStorages = userState.LastMonthProducts
             .Where(p => p.ProductName == userState.ProductInfo.ProductName)

@@ -4,5 +4,5 @@ namespace IMagParsing.Services.Interfaces;
 
 public interface IChartService
 {
-    byte[] GeneratePriceTrendChartAsync(UserState userState);
+    Task<byte[]> GeneratePriceTrendChart(UserState userState, CancellationToken cancellationToken = default);
 }

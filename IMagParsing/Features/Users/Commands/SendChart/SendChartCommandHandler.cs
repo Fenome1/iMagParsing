@@ -11,12 +11,12 @@ public class SendChartCommandHandler(
 {
     public async Task Handle(SendChartCommand request, CancellationToken cancellationToken)
     {
-        var userState = stateService.Get(request.UserId);
+        var userState = await stateService.Get(request.UserId);
 
         if (userState is null)
             throw new Exception($"Ошибка получения состояния пользователя: {request.UserId}");
 
-        var bytes = chartService.GeneratePriceTrendChartAsync(userState);
+        var bytes = await chartService.GeneratePriceTrendChart(userState, cancellationToken);
 
         await sendHandler.SendImage(request.UserId, bytes, cancellationToken: cancellationToken);
     }

@@ -18,7 +18,7 @@ public class ChartCallbackHandleCommandHandler(
 {
     public async Task Handle(ChartCallbackHandleCommand request, CancellationToken cancellationToken)
     {
-        var userState = userStateService.Get(request.UserId);
+        var userState = await userStateService.Get(request.UserId);
 
         if (userState is null || userState.CurrentStep is ChartStep.Complete)
         {

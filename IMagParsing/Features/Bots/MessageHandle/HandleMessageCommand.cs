@@ -1,5 +1,5 @@
 ﻿using MediatR;
 
-namespace IMagParsing.Features.Bots.Message;
+namespace IMagParsing.Features.Bots.MessageHandle;
 
 public record HandleMessageCommand(Telegram.Bot.Types.Message Message) : IRequest;

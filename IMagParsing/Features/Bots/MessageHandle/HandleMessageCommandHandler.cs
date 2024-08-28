@@ -1,10 +1,10 @@
-﻿using IMagParsing.Features.Bots.Chart.Steps.Model;
-using IMagParsing.Features.Bots.Check;
-using IMagParsing.Features.Bots.Subscription;
+﻿using IMagParsing.Features.Bots.Commands.Chart.Steps.Model;
+using IMagParsing.Features.Bots.Commands.Check;
+using IMagParsing.Features.Bots.Commands.Subscription;
 using IMagParsing.Helpers;
 using MediatR;
 
-namespace IMagParsing.Features.Bots.Message;
+namespace IMagParsing.Features.Bots.MessageHandle;
 
 public class HandleMessageCommandHandler(IMediator mediator) : IRequestHandler<HandleMessageCommand>
 {

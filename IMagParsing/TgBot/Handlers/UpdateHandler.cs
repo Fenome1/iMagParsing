@@ -1,8 +1,5 @@
-﻿using IMagParsing.Features.Bots.Chart;
-using IMagParsing.Features.Bots.Chart.Steps.Model;
-using IMagParsing.Features.Bots.Check;
-using IMagParsing.Features.Bots.Message;
-using IMagParsing.Features.Bots.Subscription;
+﻿using IMagParsing.Features.Bots.Commands.Chart;
+using IMagParsing.Features.Bots.MessageHandle;
 using MediatR;
 using Telegram.Bot;
 using Telegram.Bot.Polling;

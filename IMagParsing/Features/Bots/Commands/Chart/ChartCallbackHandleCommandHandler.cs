@@ -1,14 +1,14 @@
 ﻿using IMagParsing.Common.Enums;
-using IMagParsing.Features.Bots.Chart.Steps.Color;
-using IMagParsing.Features.Bots.Chart.Steps.Model;
-using IMagParsing.Features.Bots.Chart.Steps.Storage;
+using IMagParsing.Features.Bots.Commands.Chart.Steps.Color;
+using IMagParsing.Features.Bots.Commands.Chart.Steps.Model;
+using IMagParsing.Features.Bots.Commands.Chart.Steps.Storage;
 using IMagParsing.Features.Users.Commands.SendChart;
 using IMagParsing.Services.Interfaces;
 using IMagParsing.TgBot.Handlers.Interfaces;
 using IMagParsing.ViewModels;
 using MediatR;
 
-namespace IMagParsing.Features.Bots.Chart;
+namespace IMagParsing.Features.Bots.Commands.Chart;
 
 public class ChartCallbackHandleCommandHandler(
     IUserStateService userStateService,

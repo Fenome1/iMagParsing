@@ -6,7 +6,7 @@ using IMagParsing.ViewModels;
 using MediatR;
 using Telegram.Bot.Types.ReplyMarkups;
 
-namespace IMagParsing.Features.Bots.Chart.Steps.Model;
+namespace IMagParsing.Features.Bots.Commands.Chart.Steps.Model;
 
 public class SendModelButtonStepCommandHandler(
     IProductRepository productRepository,

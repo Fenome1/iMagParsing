@@ -4,7 +4,7 @@ using IMagParsing.Repos.Interfaces;
 using IMagParsing.TgBot.Handlers.Interfaces;
 using MediatR;
 
-namespace IMagParsing.Features.Bots.Subscription;
+namespace IMagParsing.Features.Bots.Commands.Subscription;
 
 public class SubscriptionCommandHandler(IUserRepository userRepository, ISendHandler sendHandler)
     : IRequestHandler<SubscriptionCommand>

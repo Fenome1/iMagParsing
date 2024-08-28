@@ -6,7 +6,7 @@ using IMagParsing.TgBot.Handlers.Interfaces;
 using IMagParsing.ViewModels;
 using MediatR;
 
-namespace IMagParsing.Features.Bots.Check;
+namespace IMagParsing.Features.Bots.Commands.Check;
 
 public class CheckProductsCommandHandler(
     IProductRepository productRepository,

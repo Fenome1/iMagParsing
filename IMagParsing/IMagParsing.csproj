@@ -43,4 +43,8 @@
         </Content>
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Features\Bots\Commands\" />
+    </ItemGroup>
+
 </Project>

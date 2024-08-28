@@ -31,9 +31,15 @@ public class MessageService : IMessageService
         var formattedList = products
             .OrderBy(p => p.ProductName)
             .ThenBy(p => p.StorageSize.ExtractStorageSize())
-            .Select(p => $"📱 Название: {p.ProductName} {p.StorageSize}\n" +
-                         $"💵 Цена: {p.Price.FormatPrice()} Руб.\n" +
-                         $"🎨 Цвет(-а): {p.Colors}\n")
+            .Select(p =>
+            {
+                var price = p.Price;
+                var formattedPrice = price > 0 ? $"{price.FormatPrice()} Руб." : "по запросу";
+
+                return $"📱 Название: {p.ProductName} {p.StorageSize}\n" +
+                       $"💵 Цена: {formattedPrice} \n" +
+                       $"🎨 Цвет(-а): {p.Colors}\n";
+            })
             .ToList();
 
         return string.Join("\n", formattedList);

@@ -13,8 +13,8 @@ public class ParseProductJob(IProductParserService parserService, IMediator medi
         foreach (var url in UrlDataConfig.ParsingUrls)
             try
             {
-                await mediator.Send(new AddParsingProductsCommand(
-                    await parserService.ParseImagProductsAsync(url)));
+                var products = await parserService.ParseImagProductsAsync(url);
+                await mediator.Send(new AddParsingProductsCommand(products));
             }
             catch (Exception e)
             {

@@ -26,7 +26,7 @@ public class ProductParserService(HtmlWeb htmlWeb) : IProductParserService
             ProductName = productName,
             ColorType = p.GetAttributeValue("data-selectoptions1", null),
             StorageSize = p.GetAttributeValue("data-selectoptions2", null),
-            Price = Convert.ToDecimal(p.GetAttributeValue("data-custom_price", null))
+            Price = Convert.ToDecimal(p.GetAttributeValue("data-custom_price", 0))
         }).ToArray();
     }
 }

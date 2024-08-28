@@ -1,10 +1,10 @@
-﻿using IMagParsing.Repos.Interfaces;
+﻿using IMagParsing.Helpers;
 using IMagParsing.Services.Interfaces;
 using IMagParsing.TgBot.Handlers.Interfaces;
 using MediatR;
 using Telegram.Bot.Types.ReplyMarkups;
 
-namespace IMagParsing.Features.Bots.Chart.Storage;
+namespace IMagParsing.Features.Bots.Chart.Steps.Storage;
 
 public class SendStorageButtonStepCommandHandler(ISendHandler sendHandler, IUserStateService userStateService)
     : IRequestHandler<SendStorageButtonStepCommand>
@@ -13,12 +13,13 @@ public class SendStorageButtonStepCommandHandler(ISendHandler sendHandler, IUser
     {
         var userState = userStateService.Get(request.UserId);
 
-        var productStores = userState.LastMonthProducts
+        var productStorages = userState.LastMonthProducts
             .Where(p => p.ProductName == userState.ProductInfo.ProductName)
+            .OrderBy(p => p.StorageSize.ExtractStorageSize())
             .Select(p => p.StorageSize)
             .Distinct();
 
-        var buttons = productStores
+        var buttons = productStorages
             .Select(storage => InlineKeyboardButton.WithCallbackData(storage, $"storage_{storage}"))
             .ToArray();
 

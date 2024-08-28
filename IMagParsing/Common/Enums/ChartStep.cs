@@ -3,7 +3,7 @@
 public enum ChartStep
 {
     Model,
-    Store,
-    Colors,
+    Storage,
+    Color,
     Complete
 }

@@ -1,4 +1,4 @@
-﻿using System.Globalization;
+﻿using IMagParsing.Helpers;
 using IMagParsing.Services.Interfaces;
 using IMagParsing.ViewModels;
 
@@ -17,9 +17,9 @@ public class MessageService : IMessageService
             var message = $"📱 Название: {product.ProductName}\n" +
                           $"🎨 Цвет: {product.ColorType}\n" +
                           $"💿 Размер: {product.StorageSize}.\n" +
-                          $"💸 Старая цена: {FormatPrice(product.OldPrice)} Руб.\n" +
-                          $"💵 Новая цена: {FormatPrice(product.CurrentPrice)} Руб.\n" +
-                          $"{priceChange} на {FormatPrice(product.Deference)} Руб.\n";
+                          $"💸 Старая цена: {product.OldPrice.FormatPrice()} Руб.\n" +
+                          $"💵 Новая цена: {product.CurrentPrice.FormatPrice()} Руб.\n" +
+                          $"{priceChange} на {product.Deference.FormatPrice()} Руб.\n";
 
             priceChangeMessages.Add(message);
         }
@@ -31,26 +31,13 @@ public class MessageService : IMessageService
     {
         var formattedList = products
             .OrderBy(p => p.ProductName)
-            .ThenBy(p => ExtractStorageSize(p.StorageSize))
+            .ThenBy(p => p.StorageSize.ExtractStorageSize())
             .Select(p => $"📱 Название: {p.ProductName} \n" +
                          $"🎨 Цвет(-а): {p.Colors}\n" +
                          $"💿 Размер: {p.StorageSize}.\n" +
-                         $"💵 Цена: {FormatPrice(p.Price)} Руб.\n")
+                         $"💵 Цена: {p.Price.FormatPrice()} Руб.\n")
             .ToList();
 
         return string.Join("\n", formattedList);
-    }
-
-    private static string FormatPrice(decimal price)
-    {
-        return price
-            .ToString("N2", CultureInfo.InvariantCulture)
-            .Replace(",", " ");
-    }
-
-    public int ExtractStorageSize(string storageSize)
-    {
-        var sizeDigits = new string(storageSize.Where(char.IsDigit).ToArray());
-        return int.TryParse(sizeDigits, out var size) ? size : 0;
     }
 }

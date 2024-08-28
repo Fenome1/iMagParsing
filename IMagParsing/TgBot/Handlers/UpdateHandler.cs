@@ -1,5 +1,5 @@
 ﻿using IMagParsing.Features.Bots.Chart;
-using IMagParsing.Features.Bots.Chart.Model;
+using IMagParsing.Features.Bots.Chart.Steps.Model;
 using IMagParsing.Features.Bots.Check;
 using IMagParsing.Features.Bots.Subscription;
 using MediatR;
@@ -30,7 +30,7 @@ public class UpdateHandler(IMediator mediator) : IUpdateHandler
             case { Type: UpdateType.CallbackQuery, CallbackQuery: not null }:
             {
                 var userId = update.CallbackQuery.From.Id;
-                await mediator.Send(new ChartHandleCommand(userId, update.CallbackQuery),
+                await mediator.Send(new ChartCallbackHandleCommand(userId, update.CallbackQuery),
                     cancellationToken);
                 break;
             }

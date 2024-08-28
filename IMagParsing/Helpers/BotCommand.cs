@@ -1,6 +1,4 @@
-﻿using IMagParsing.Common.Enums;
-
-namespace IMagParsing.Helpers;
+﻿namespace IMagParsing.Helpers;
 
 public static class BotCommand
 {

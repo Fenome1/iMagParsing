@@ -6,7 +6,7 @@ using IMagParsing.ViewModels;
 using MediatR;
 using Telegram.Bot.Types.ReplyMarkups;
 
-namespace IMagParsing.Features.Bots.Chart.Model;
+namespace IMagParsing.Features.Bots.Chart.Steps.Model;
 
 public class SendModelButtonStepCommandHandler(
     IProductRepository productRepository,
@@ -17,13 +17,13 @@ public class SendModelButtonStepCommandHandler(
     {
         var lastMonthProducts = await productRepository.GetLastMonth();
 
-        var newUserState = new UserState()
+        var newUserState = new UserState
         {
             UserId = request.UserId,
             CurrentStep = ChartStep.Model,
             LastMonthProducts = lastMonthProducts
         };
-        
+
         userStateService.SaveUserState(newUserState);
 
         var productModels = newUserState

@@ -4,7 +4,7 @@ using IMagParsing.TgBot.Handlers.Interfaces;
 using MediatR;
 using Telegram.Bot.Types.ReplyMarkups;
 
-namespace IMagParsing.Features.Bots.Commands.Chart.Steps.Storage;
+namespace IMagParsing.Features.Bots.Commands.Chart.Steps.SecondStorage;
 
 public class SendStorageButtonStepCommandHandler(ISendHandler sendHandler, IUserStateService userStateService)
     : IRequestHandler<SendStorageButtonStepCommand>

@@ -1,4 +1,4 @@
-﻿using IMagParsing.Features.Bots.Commands.Chart.Steps.Model;
+﻿using IMagParsing.Features.Bots.Commands.Chart.Steps.FirstModel;
 using IMagParsing.Features.Bots.Commands.Check;
 using IMagParsing.Features.Bots.Commands.Subscription;
 using IMagParsing.Helpers;

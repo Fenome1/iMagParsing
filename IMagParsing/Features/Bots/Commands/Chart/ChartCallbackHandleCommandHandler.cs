@@ -1,7 +1,7 @@
 ﻿using IMagParsing.Common.Enums;
-using IMagParsing.Features.Bots.Commands.Chart.Steps.Color;
-using IMagParsing.Features.Bots.Commands.Chart.Steps.Model;
-using IMagParsing.Features.Bots.Commands.Chart.Steps.Storage;
+using IMagParsing.Features.Bots.Commands.Chart.Steps.FirstModel;
+using IMagParsing.Features.Bots.Commands.Chart.Steps.SecondStorage;
+using IMagParsing.Features.Bots.Commands.Chart.Steps.ThirdColor;
 using IMagParsing.Features.Users.Commands.SendChart;
 using IMagParsing.Services.Interfaces;
 using IMagParsing.TgBot.Handlers.Interfaces;

@@ -3,7 +3,7 @@ using IMagParsing.TgBot.Handlers.Interfaces;
 using MediatR;
 using Telegram.Bot.Types.ReplyMarkups;
 
-namespace IMagParsing.Features.Bots.Commands.Chart.Steps.Color;
+namespace IMagParsing.Features.Bots.Commands.Chart.Steps.ThirdColor;
 
 public class SendColorButtonStepCommandHandler(
     ISendHandler sendHandler,

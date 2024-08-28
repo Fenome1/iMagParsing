@@ -14,9 +14,8 @@ public class MessageService : IMessageService
         {
             var priceChange = product.IsPriceUp ? "⬆ Увеличилась" : "⬇ Уменьшилась";
 
-            var message = $"📱 Название: {product.ProductName}\n" +
+            var message = $"📱 Название: {product.ProductName} {product.StorageSize}\n" +
                           $"🎨 Цвет: {product.ColorType}\n" +
-                          $"💿 Размер: {product.StorageSize}.\n" +
                           $"💸 Старая цена: {product.OldPrice.FormatPrice()} Руб.\n" +
                           $"💵 Новая цена: {product.CurrentPrice.FormatPrice()} Руб.\n" +
                           $"{priceChange} на {product.Deference.FormatPrice()} Руб.\n";
@@ -32,10 +31,9 @@ public class MessageService : IMessageService
         var formattedList = products
             .OrderBy(p => p.ProductName)
             .ThenBy(p => p.StorageSize.ExtractStorageSize())
-            .Select(p => $"📱 Название: {p.ProductName} \n" +
-                         $"🎨 Цвет(-а): {p.Colors}\n" +
-                         $"💿 Размер: {p.StorageSize}.\n" +
-                         $"💵 Цена: {p.Price.FormatPrice()} Руб.\n")
+            .Select(p => $"📱 Название: {p.ProductName} {p.StorageSize}\n" +
+                         $"💵 Цена: {p.Price.FormatPrice()} Руб.\n" +
+                         $"🎨 Цвет(-а): {p.Colors}\n")
             .ToList();
 
         return string.Join("\n", formattedList);

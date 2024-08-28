@@ -36,7 +36,7 @@ public class ChartService : IChartService
 
         plt.Axes.DateTimeTicksBottom();
 
-        plt.Title($"{productInfo.ProductName} {productInfo.StorageSize} ({productInfo.Color })");
+        plt.Title($"{productInfo.ProductName} {productInfo.StorageSize} ({productInfo.Color})");
 
         plt.YLabel("Цена");
         plt.XLabel("Дата");

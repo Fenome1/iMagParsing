@@ -58,7 +58,8 @@ public class SendHandler(ITelegramBotClient botClient) : ISendHandler
         }
     }
 
-    public async Task SendImage(long chatId, byte[] imageBytes, string caption = null, CancellationToken cancellationToken = default)
+    public async Task SendImage(long chatId, byte[] imageBytes, string caption = null,
+        CancellationToken cancellationToken = default)
     {
         using var stream = new MemoryStream(imageBytes);
         var inputMedia = new InputFileStream(stream, $"chart_for_{chatId}.png");
@@ -66,8 +67,8 @@ public class SendHandler(ITelegramBotClient botClient) : ISendHandler
         try
         {
             await botClient.SendPhotoAsync(
-                chatId: chatId,
-                photo: inputMedia,
+                chatId,
+                inputMedia,
                 caption: caption,
                 cancellationToken: cancellationToken
             );

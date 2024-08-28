@@ -4,7 +4,9 @@ using MediatR;
 
 namespace IMagParsing.Features.Users.Commands.SendChart;
 
-public class SendChartCommandHandler(ISendHandler sendHandler, IUserStateService stateService, 
+public class SendChartCommandHandler(
+    ISendHandler sendHandler,
+    IUserStateService stateService,
     IChartService chartService) : IRequestHandler<SendChartCommand>
 {
     public async Task Handle(SendChartCommand request, CancellationToken cancellationToken)
@@ -15,7 +17,7 @@ public class SendChartCommandHandler(ISendHandler sendHandler, IUserStateService
             throw new Exception($"Ошибка получения состояния пользователя: {request.UserId}");
 
         var bytes = chartService.GeneratePriceTrendChartAsync(userState);
-        
+
         await sendHandler.SendImage(request.UserId, bytes, cancellationToken: cancellationToken);
     }
 }

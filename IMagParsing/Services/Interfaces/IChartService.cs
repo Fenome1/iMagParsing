@@ -1,5 +1,4 @@
-﻿using IMagParsing.Core.Models;
-using IMagParsing.ViewModels;
+﻿using IMagParsing.ViewModels;
 
 namespace IMagParsing.Services.Interfaces;
 

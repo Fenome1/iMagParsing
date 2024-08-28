@@ -43,8 +43,4 @@
         </Content>
     </ItemGroup>
 
-    <ItemGroup>
-        <Folder Include="Features\Users\Commands\"/>
-    </ItemGroup>
-
 </Project>

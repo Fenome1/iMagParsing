@@ -9,4 +9,7 @@ public interface ISendHandler
 
     Task AnswerCallbackQuery(string callbackQueryId, string? text = null, bool showAlert = false,
         CancellationToken cancellationToken = default);
+
+    Task SendImage(long userId, byte[] imageBytes, string caption = null,
+        CancellationToken cancellationToken = default);
 }

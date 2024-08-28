@@ -59,6 +59,7 @@ public static class Startup
         services.AddTransient<IProductRepository, ProductRepository>();
         services.AddTransient<IUserRepository, UserRepository>();
         services.AddTransient<IMessageService, MessageService>();
+        services.AddTransient<IChartService, ChartService>();
 
         services.AddSingleton<IUserStateService, UserStateService>();
         services.AddSingleton<HtmlWeb>();

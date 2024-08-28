@@ -29,8 +29,8 @@ public class UpdateHandler(IMediator mediator) : IUpdateHandler
             }
             case { Type: UpdateType.CallbackQuery, CallbackQuery: not null }:
             {
-                var userId = update.CallbackQuery.From.Id;
-                await mediator.Send(new ChartCallbackHandleCommand(userId, update.CallbackQuery),
+                await mediator.Send(new ChartCallbackHandleCommand(update.CallbackQuery.From.Id,
+                        update.CallbackQuery),
                     cancellationToken);
                 break;
             }

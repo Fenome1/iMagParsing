@@ -1,6 +1,7 @@
 ﻿using IMagParsing.TgBot.Handlers.Interfaces;
 using Telegram.Bot;
 using Telegram.Bot.Exceptions;
+using Telegram.Bot.Types;
 using Telegram.Bot.Types.ReplyMarkups;
 
 namespace IMagParsing.TgBot.Handlers;
@@ -54,6 +55,26 @@ public class SendHandler(ITelegramBotClient botClient) : ISendHandler
         catch (ApiRequestException ex)
         {
             Console.WriteLine($"Ошибка при ответе на CallbackQuery: {callbackQueryId} ({ex.ErrorCode} - {ex.Message})");
+        }
+    }
+
+    public async Task SendImage(long chatId, byte[] imageBytes, string caption = null, CancellationToken cancellationToken = default)
+    {
+        using var stream = new MemoryStream(imageBytes);
+        var inputMedia = new InputFileStream(stream, $"chart_for_{chatId}.png");
+
+        try
+        {
+            await botClient.SendPhotoAsync(
+                chatId: chatId,
+                photo: inputMedia,
+                caption: caption,
+                cancellationToken: cancellationToken
+            );
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error sending photo: {ex.Message}");
         }
     }
 

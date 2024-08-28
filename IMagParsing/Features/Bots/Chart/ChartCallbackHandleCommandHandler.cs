@@ -2,6 +2,7 @@
 using IMagParsing.Features.Bots.Chart.Steps.Color;
 using IMagParsing.Features.Bots.Chart.Steps.Model;
 using IMagParsing.Features.Bots.Chart.Steps.Storage;
+using IMagParsing.Features.Users.Commands.SendChart;
 using IMagParsing.Services.Interfaces;
 using IMagParsing.TgBot.Handlers.Interfaces;
 using IMagParsing.ViewModels;
@@ -80,8 +81,8 @@ public class ChartCallbackHandleCommandHandler(
         userState.CurrentStep = ChartStep.Complete;
         userStateService.SaveUserState(userState);
 
-        var productInfo = userState.ProductInfo;
-        await sendHandler.SendTextMessage(userState.UserId,
-            $"{productInfo.ProductName} {productInfo.StorageSize} {productInfo.Color}", cancellationToken);
+        await mediator.Send(new SendChartCommand(userState.UserId), cancellationToken);
+
+        userStateService.DeleteUserStateAsync(userState.UserId);
     }
 }

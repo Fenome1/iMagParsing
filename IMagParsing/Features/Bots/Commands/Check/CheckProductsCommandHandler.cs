@@ -9,7 +9,6 @@ using MediatR;
 namespace IMagParsing.Features.Bots.Commands.Check;
 
 public class CheckProductsCommandHandler(
-    IProductRepository productRepository,
     ISendHandler sendHandler,
     IMessageService messageService,
     IMediator mediator) : IRequestHandler<CheckProductsCommand>

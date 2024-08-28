@@ -24,7 +24,7 @@ public class SendModelButtonStepCommandHandler(
             LastMonthProducts = lastMonthProducts
         };
 
-        userStateService.SaveUserStateAsync(newUserState);
+        await userStateService.SaveUserStateAsync(newUserState);
 
         var productModels = newUserState
             .LastMonthProducts.Select(p => p.ProductName).Distinct();

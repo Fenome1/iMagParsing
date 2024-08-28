@@ -52,7 +52,7 @@ public class ChartCallbackHandleCommandHandler(
 
         userState.ProductInfo.ProductName = selectedModel;
         userState.CurrentStep = ChartStep.Storage;
-        userStateService.SaveUserStateAsync(userState);
+        await userStateService.SaveUserStateAsync(userState);
 
         await sendHandler.SendTextMessageAsync(userState.UserId, $"Вы выбрали модель: {selectedModel}.",
             cancellationToken);
@@ -63,11 +63,10 @@ public class ChartCallbackHandleCommandHandler(
         CancellationToken cancellationToken)
     {
         var selectedStorage = callbackData["storage_".Length..];
-        ;
 
         userState.ProductInfo.StorageSize = selectedStorage;
         userState.CurrentStep = ChartStep.Color;
-        userStateService.SaveUserStateAsync(userState);
+        await userStateService.SaveUserStateAsync(userState);
 
         await sendHandler.SendTextMessageAsync(userState.UserId, $"Вы выбрали объем: {selectedStorage}.",
             cancellationToken);
@@ -81,10 +80,14 @@ public class ChartCallbackHandleCommandHandler(
 
         userState.ProductInfo.Color = selectedColor;
         userState.CurrentStep = ChartStep.Complete;
-        userStateService.SaveUserStateAsync(userState);
+        await userStateService.SaveUserStateAsync(userState);
+        
+        await sendHandler.SendTextMessageAsync(userState.UserId, 
+            "Генерация графика, пожалуйста, подождите...", 
+            cancellationToken: cancellationToken);
 
         await mediator.Send(new SendChartCommand(userState.UserId), cancellationToken);
 
-        userStateService.DeleteUserStateAsync(userState.UserId);
+        await userStateService.DeleteUserStateAsync(userState.UserId);
     }
 }

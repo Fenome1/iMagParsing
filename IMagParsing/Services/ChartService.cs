@@ -31,12 +31,12 @@ public class ChartService : IChartService
         var sp = plt.Add.Scatter(xs, ys);
 
         sp.Smooth = true;
-        sp.LineWidth = 2;
-        sp.MarkerSize = 7;
+        sp.LineWidth = 3;
+        sp.MarkerSize = 5;
 
         plt.Axes.DateTimeTicksBottom();
 
-        plt.Title(productInfo.ProductName);
+        plt.Title($"{productInfo.ProductName} {productInfo.StorageSize} ({productInfo.Color })");
 
         plt.YLabel("Цена");
         plt.XLabel("Дата");

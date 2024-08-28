@@ -39,6 +39,24 @@ public class SendHandler(ITelegramBotClient botClient) : ISendHandler
         }
     }
 
+    public async Task AnswerCallbackQuery(string callbackQueryId, string? text = null, bool showAlert = false,
+        CancellationToken cancellationToken = default)
+    {
+        try
+        {
+            await botClient.AnswerCallbackQueryAsync(
+                callbackQueryId,
+                text,
+                showAlert,
+                cancellationToken: cancellationToken
+            );
+        }
+        catch (ApiRequestException ex)
+        {
+            Console.WriteLine($"Ошибка при ответе на CallbackQuery: {callbackQueryId} ({ex.ErrorCode} - {ex.Message})");
+        }
+    }
+
     private static IEnumerable<string> SplitMessage(string message, int maxLength)
     {
         for (var i = 0; i < message.Length; i += maxLength)

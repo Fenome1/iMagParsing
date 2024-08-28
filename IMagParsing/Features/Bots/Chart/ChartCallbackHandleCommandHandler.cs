@@ -22,6 +22,7 @@ public class ChartCallbackHandleCommandHandler(
         if (userState is null || userState.CurrentStep is ChartStep.Complete)
         {
             await mediator.Send(new SendModelButtonStepCommand(request.UserId), cancellationToken);
+            await sendHandler.AnswerCallbackQuery(request.CallbackQuery.Id, cancellationToken: cancellationToken);
             return;
         }
 
@@ -39,6 +40,8 @@ public class ChartCallbackHandleCommandHandler(
                 await HandleColorStepAsync(userState, callbackData, cancellationToken);
                 break;
         }
+
+        await sendHandler.AnswerCallbackQuery(request.CallbackQuery.Id, cancellationToken: cancellationToken);
     }
 
     private async Task HandleModelStepAsync(UserState userState, string callbackData,
@@ -72,7 +75,6 @@ public class ChartCallbackHandleCommandHandler(
         CancellationToken cancellationToken)
     {
         var selectedColor = callbackData["color_".Length..];
-        ;
 
         userState.ProductInfo.Color = selectedColor;
         userState.CurrentStep = ChartStep.Complete;

@@ -6,4 +6,7 @@ public interface ISendHandler
 {
     Task SendTextMessage(long userId, string message, CancellationToken cancellationToken = default,
         IReplyMarkup? replyMarkup = null);
+
+    Task AnswerCallbackQuery(string callbackQueryId, string? text = null, bool showAlert = false,
+        CancellationToken cancellationToken = default);
 }

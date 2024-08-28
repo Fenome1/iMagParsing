@@ -1,4 +1,5 @@
-﻿using IMagParsing.Common.Enums;
+﻿using IMagParsing.Features.Bots.Chart;
+using IMagParsing.Features.Bots.Chart.Steps.Model;
 using IMagParsing.Features.Bots.Check;
 using IMagParsing.Features.Bots.Subscription;
 using MediatR;
@@ -15,13 +16,24 @@ public class UpdateHandler(IMediator mediator) : IUpdateHandler
     public async Task HandleUpdateAsync(ITelegramBotClient botClient, Update update,
         CancellationToken cancellationToken)
     {
-        if (update is { Type: UpdateType.Message, Message: not null })
+        switch (update)
         {
-            var message = update.Message;
-            var userId = message.From.Id;
+            case { Type: UpdateType.Message, Message: not null }:
+            {
+                var message = update.Message;
+                var userId = message.From.Id;
 
-            if (message.Text != null)
-                await HandleCommandAsync(message, userId, cancellationToken);
+                if (message.Text != null)
+                    await HandleCommandAsync(message, userId, cancellationToken);
+                break;
+            }
+            case { Type: UpdateType.CallbackQuery, CallbackQuery: not null }:
+            {
+                await mediator.Send(new ChartCallbackHandleCommand(update.CallbackQuery.From.Id,
+                        update.CallbackQuery),
+                    cancellationToken);
+                break;
+            }
         }
     }
 
@@ -45,6 +57,9 @@ public class UpdateHandler(IMediator mediator) : IUpdateHandler
                 break;
             case Common.Enums.BotCommand.Check:
                 await mediator.Send(new CheckProductsCommand(userId), cancellationToken);
+                break;
+            case Common.Enums.BotCommand.Chart:
+                await mediator.Send(new SendModelButtonStepCommand(userId), cancellationToken);
                 break;
         }
     }

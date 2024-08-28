@@ -6,5 +6,6 @@ public enum BotCommand
     Unsubscribe,
     Start,
     Check,
+    Chart,
     Unknown
 }

@@ -31,4 +31,11 @@ public class ProductRepository(ProductsContext context) : IProductRepository
         return await context.ProductParsings
             .ToArrayAsync();
     }
+
+    public async Task<ProductParsing[]> GetLastMonth()
+    {
+        return await context.ProductParsings
+            .Where(p => p.ParsingDate >= DateTime.UtcNow.AddMonths(-1))
+            .ToArrayAsync();
+    }
 }

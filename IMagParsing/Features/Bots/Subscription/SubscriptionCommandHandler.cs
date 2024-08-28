@@ -27,7 +27,7 @@ public class SubscriptionCommandHandler(IUserRepository userRepository, ISendHan
                     ? "Вы уже подписаны на уведомления."
                     : "Вы уже отписаны от уведомлений.";
 
-                await sendHandler.SendMessage(request.UserId, alreadySubscribedMessage, cancellationToken);
+                await sendHandler.SendTextMessage(request.UserId, alreadySubscribedMessage, cancellationToken);
                 return;
             }
 
@@ -39,6 +39,6 @@ public class SubscriptionCommandHandler(IUserRepository userRepository, ISendHan
             ? "Вы подписались на уведомления"
             : "Вы отписались от уведомлений";
 
-        await sendHandler.SendMessage(request.UserId, responseMessage, cancellationToken);
+        await sendHandler.SendTextMessage(request.UserId, responseMessage, cancellationToken);
     }
 }

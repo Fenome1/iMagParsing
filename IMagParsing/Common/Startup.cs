@@ -80,6 +80,7 @@ public static class Startup
     private static void ConfigureTelegramBot(this IServiceCollection services, IConfiguration configuration)
     {
         services.Configure<BotConfig>(configuration.GetSection("BotConfig"));
+        services.Configure<UrlDataConfig>(configuration.GetSection("UrlDataConfig"));
 
         services.AddSingleton<ITelegramBotClient>(p =>
         {

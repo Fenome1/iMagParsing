@@ -18,6 +18,9 @@ public class CheckProductsCommandHandler(
         var latestProducts =
             await mediator.Send(new GetProductsByStatusQuery(ActualStatus.Last), cancellationToken);
 
+        if (latestProducts.Length == 0)
+            latestProducts = await mediator.Send(new GetProductsByStatusQuery(ActualStatus.New), cancellationToken);
+
         var groupedProducts = latestProducts
             .GroupBy(p => new { p.ProductName, p.StorageSize })
             .Select(g => new ProductGroup

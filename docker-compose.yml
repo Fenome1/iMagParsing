@@ -11,8 +11,11 @@ services:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    logging:
+      driver: "none"
 
   app:
+    restart: always
     build:
       context: .
       dockerfile: IMagParsing/Dockerfile
@@ -22,7 +25,8 @@ services:
       - ASPNETCORE_ENVIRONMENT=Production
     ports:
       - "8080:8080"
-    restart: always
+    logging:
+      driver: "none"
 
 volumes:
   postgres_data:
